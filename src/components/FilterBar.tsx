@@ -6,14 +6,17 @@ const themes = [
   "All",
   "Anime",
   "Marvel",
+  "Transfomer",
+  "Stranger Things",
   "DC",
+   "Vibrant",
   "Studio Ghibli",
   "F1",
   "Star Wars",
   "Gaming",
   "Carbon Fibre",
   "Plain",
-  "Vibrant",
+
 ];
 
 const sortOptions = [

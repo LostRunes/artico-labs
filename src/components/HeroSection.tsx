@@ -19,7 +19,25 @@ export const HeroSection = () => {
           animate={{ scale: 1, opacity: 1 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
         >
-          <ArticoLogo size="hero" />
+          {/* <ArticoLogo size="hero" /> */}
+            
+
+      <motion.div
+        
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1, y: [0, 10, 0] }}
+        transition={{ 
+          opacity: { delay: 1.2, duration: 0.6 },
+          y: { delay: 4, duration: 2, repeat: Infinity }
+        }}
+      >
+       <img
+    src="/artico.png"
+    alt="Artico"
+    className="h-auto w-40 object-contain "/>
+      </motion.div>
+
+
         </motion.div>
 
         {/* Main headline */}
@@ -61,7 +79,7 @@ export const HeroSection = () => {
         </motion.div>
 
         {/* KIIT discount badge */}
-        <motion.div
+        {/* <motion.div
           className="mt-12 inline-flex items-center gap-2 px-4 py-2 rounded-full bg-surface-elevated border border-primary/30"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -71,7 +89,7 @@ export const HeroSection = () => {
           <span className="text-sm font-medium text-muted-foreground">
             <span className="text-primary">10% off</span> for KIIT students
           </span>
-        </motion.div>
+        </motion.div> */}
       </div>
 
       {/* Scroll indicator */}

@@ -18,7 +18,7 @@ export const Footer = () => {
           {/* Links */}
           <div className="flex items-center gap-6">
             <a
-              href="https://instagram.com/artico"
+              href="https://www.instagram.com/articopro/"
               target="_blank"
               rel="noopener noreferrer"
               className="p-3 rounded-full bg-surface hover:bg-surface-elevated border border-border hover:border-primary/50 transition-all"
@@ -26,13 +26,13 @@ export const Footer = () => {
               <Instagram className="w-5 h-5 text-muted-foreground hover:text-primary transition-colors" />
             </a>
             <a
-              href="tel:+919876543210"
+              href="tel:+918455894907"
               className="p-3 rounded-full bg-surface hover:bg-surface-elevated border border-border hover:border-primary/50 transition-all"
             >
               <Phone className="w-5 h-5 text-muted-foreground hover:text-primary transition-colors" />
             </a>
             <a
-              href="mailto:hello@artico.in"
+              href="mailto:articopro.team@gmail.com"
               className="p-3 rounded-full bg-surface hover:bg-surface-elevated border border-border hover:border-primary/50 transition-all"
             >
               <Mail className="w-5 h-5 text-muted-foreground hover:text-primary transition-colors" />

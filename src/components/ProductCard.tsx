@@ -1,15 +1,17 @@
 import { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 
 interface ProductCardProps {
   id: string;
   name: string;
   theme: string;
   images: string[];
-  onClick?: () => void;
+   price: number;
 }
 
-export const ProductCard = ({ name, theme, images, onClick }: ProductCardProps) => {
+export const ProductCard = ({ id, name, theme, images, price }: ProductCardProps) => {
+  const navigate = useNavigate();
   const [isHovering, setIsHovering] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
@@ -28,9 +30,7 @@ export const ProductCard = ({ name, theme, images, onClick }: ProductCardProps) 
     }
 
     return () => {
-      if (intervalRef.current) {
-        clearInterval(intervalRef.current);
-      }
+      if (intervalRef.current) clearInterval(intervalRef.current);
     };
   }, [isHovering, images.length]);
 
@@ -39,7 +39,7 @@ export const ProductCard = ({ name, theme, images, onClick }: ProductCardProps) 
       className="card-premium group cursor-pointer overflow-hidden"
       onMouseEnter={() => setIsHovering(true)}
       onMouseLeave={() => setIsHovering(false)}
-      onClick={onClick}
+      onClick={() => navigate(`/product/${id}`)}
       whileHover={{ y: -8 }}
       transition={{ duration: 0.3 }}
     >
@@ -55,11 +55,9 @@ export const ProductCard = ({ name, theme, images, onClick }: ProductCardProps) 
             }`}
           />
         ))}
-        
-        {/* Hover overlay */}
+
         <div className="absolute inset-0 bg-gradient-to-t from-card via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-        
-        {/* Image indicators */}
+
         {images.length > 1 && isHovering && (
           <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-1">
             {images.map((_, index) => (
@@ -77,12 +75,20 @@ export const ProductCard = ({ name, theme, images, onClick }: ProductCardProps) 
       </div>
 
       {/* Content */}
-      <div className="p-4">
-        <span className="text-xs font-medium text-ice uppercase tracking-wide">{theme}</span>
-        <h3 className="font-display text-lg font-semibold mt-1 group-hover:text-primary transition-colors">
-          {name}
-        </h3>
-      </div>
+     <div className="p-4">
+  <span className="text-xs font-medium text-ice uppercase tracking-wide">
+    {theme}
+  </span>
+
+  <h3 className="font-display text-lg font-semibold mt-1 group-hover:text-primary transition-colors">
+    {name}
+  </h3>
+
+  <div className="mt-2 text-sm font-semibold text-primary">
+    ₹{price}
+  </div>
+</div>
+
     </motion.div>
   );
 };

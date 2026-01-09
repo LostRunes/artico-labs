@@ -4,6 +4,7 @@ import { Menu, X, Instagram, Phone, Mail } from "lucide-react";
 import { ArticoLogo } from "./ArticoLogo";
 import { ThemeToggle } from "./ThemeToggle";
 
+
 const navLinks = [
   { name: "Products", href: "#products" },
   { name: "Try On", href: "#try-on" },
@@ -24,10 +25,19 @@ export const Navbar = () => {
       <div className="section-container">
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
-          <a href="#" className="flex items-center gap-3">
-            <ArticoLogo size="sm" animated={false} />
-            <span className="font-display text-xl font-bold tracking-wide">ARTICO</span>
-          </a>
+          <a href="/" className="flex items-center gap-3">
+  <img
+    src="/artico.png"
+    alt="Artico"
+    className="h-11 w-auto object-contain"
+  />
+
+  
+  <span className="font-display text-xl font-bold tracking-wide">
+    ARTICO
+  </span>
+</a>
+
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-8">
@@ -47,7 +57,7 @@ export const Navbar = () => {
             {/* Social icons - desktop */}
             <div className="hidden md:flex items-center gap-3">
               <a
-                href="https://instagram.com"
+                href="https://www.instagram.com/articopro/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="p-2 rounded-full hover:bg-surface-elevated transition-colors"
@@ -91,7 +101,7 @@ export const Navbar = () => {
               ))}
               <div className="flex items-center gap-4 pt-4 border-t border-border">
                 <a
-                  href="https://instagram.com"
+                  href="https://www.instagram.com/articopro/"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors"

@@ -24,7 +24,7 @@ export const ContactSection = () => {
         <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
           {/* Instagram - Primary */}
           <motion.a
-            href="https://instagram.com/artico"
+            href="https://www.instagram.com/articopro/"
             target="_blank"
             rel="noopener noreferrer"
             className="card-premium p-8 text-center group"
@@ -39,12 +39,12 @@ export const ContactSection = () => {
             </div>
             <h3 className="font-display text-xl font-semibold mb-2">Instagram</h3>
             <p className="text-muted-foreground text-sm mb-3">Best for orders & updates</p>
-            <span className="text-primary font-medium">@artico</span>
+            <span className="text-primary font-medium">@articopro</span>
           </motion.a>
 
           {/* WhatsApp */}
           <motion.a
-            href="https://wa.me/919876543210"
+            href="https://api.whatsapp.com/send?phone=918455894907"
             target="_blank"
             rel="noopener noreferrer"
             className="card-premium p-8 text-center group"
@@ -59,12 +59,12 @@ export const ContactSection = () => {
             </div>
             <h3 className="font-display text-xl font-semibold mb-2">WhatsApp</h3>
             <p className="text-muted-foreground text-sm mb-3">Quick responses</p>
-            <span className="text-primary font-medium">+91 98765 43210</span>
+            <span className="text-primary font-medium">+91 84558 94907</span>
           </motion.a>
 
           {/* Email */}
           <motion.a
-            href="mailto:hello@artico.in"
+            href="mailto:articopro.team@gmail.com"
             className="card-premium p-8 text-center group"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -77,7 +77,7 @@ export const ContactSection = () => {
             </div>
             <h3 className="font-display text-xl font-semibold mb-2">Email</h3>
             <p className="text-muted-foreground text-sm mb-3">For business inquiries</p>
-            <span className="text-primary font-medium">hello@artico.in</span>
+            <span className="text-primary font-medium">articopro.team@gmail.com</span>
           </motion.a>
         </div>
 
@@ -96,7 +96,7 @@ export const ContactSection = () => {
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <a
-              href="https://instagram.com/artico"
+              href="https://www.instagram.com/articopro/"
               target="_blank"
               rel="noopener noreferrer"
               className="btn-hero-primary flex items-center gap-2"
@@ -105,7 +105,7 @@ export const ContactSection = () => {
               Order via Instagram
             </a>
             <a
-              href="https://wa.me/919876543210"
+              href="https://api.whatsapp.com/send?phone=918455894907"
               target="_blank"
               rel="noopener noreferrer"
               className="btn-hero-secondary flex items-center gap-2"
