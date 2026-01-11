@@ -45,7 +45,7 @@ export default function ProductDetail() {
       prev === 0 ? product.images.length - 1 : prev - 1
     );
 
-  return (
+   return (
     <div className="min-h-screen bg-background pt-24 pb-20">
       <div className="section-container">
         {/* Back Button */}
@@ -60,43 +60,35 @@ export default function ProductDetail() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-14">
           {/* LEFT — Images & Carousel */}
           <div>
-            <div className="relative aspect-[4/3] rounded-2xl overflow-hidden border border-border bg-card">
-              <AnimatePresence mode="wait">
-                <motion.img
-                  key={activeIndex}
-                  src={product.images[activeIndex]}
-                  alt={product.name}
-                  initial={{ opacity: 0, scale: 1.05 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.95 }}
-                  transition={{ duration: 0.35 }}
-                  className="absolute inset-0 w-full h-full object-cover"
-                />
-              </AnimatePresence>
+            <div className="relative">
+              {/* Golden glow */}
+              <div
+                className="absolute -inset-1 rounded-2xl bg-gradient-to-r
+                           from-yellow-400/40 via-amber-300/30 to-yellow-400/40
+                           blur-xl opacity-70"
+              />
 
-              {/* Navigation Arrows */}
-              {/* {product.images.length > 1 && (
-                <>
-                  <button
-                    onClick={prevImage}
-                    className="absolute left-3 top-1/2 -translate-y-1/2 p-2 rounded-full
-                               bg-black/40 backdrop-blur hover:bg-black/60 transition"
-                  >
-                    <ChevronLeft className="w-5 h-5 text-white" />
-                  </button>
+              {/* Actual carousel */}
+              <div
+                className="relative aspect-[4/3] rounded-2xl overflow-hidden
+                           border border-border bg-card"
+              >
+                <AnimatePresence mode="wait">
+                  <motion.img
+                    key={activeIndex}
+                    src={product.images[activeIndex]}
+                    alt={product.name}
+                    initial={{ opacity: 0, scale: 1.05 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.95 }}
+                    transition={{ duration: 0.35 }}
+                    className="absolute inset-0 w-full h-full object-cover"
+                  />
+                </AnimatePresence>
 
-                  <button
-                    onClick={nextImage}
-                    className="absolute right-3 top-1/2 -translate-y-1/2 p-2 rounded-full
-                               bg-black/40 backdrop-blur hover:bg-black/60 transition"
-                  >
-                    <ChevronRight className="w-5 h-5 text-white" />
-                  </button>
-                </>
-              )} */}
-
-              {/* Bottom Gradient Overlay */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
+                {/* Bottom Gradient Overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
+              </div>
             </div>
 
             {/* Thumbnails */}
@@ -122,7 +114,6 @@ export default function ProductDetail() {
               </div>
             )}
           </div>
-
           {/* RIGHT — Product Details */}
           <div>
             <span className="text-xs uppercase tracking-wide text-ice">
