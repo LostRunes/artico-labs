@@ -22,7 +22,7 @@ export const LaptopPreview = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   return (
-    <section id="try-on" className="py-20 bg-surface">
+    <section id="try-on" className="py-20 bg-surface" data-aos="fade-up">
       <div className="section-container">
         <motion.div
           className="text-center mb-12"

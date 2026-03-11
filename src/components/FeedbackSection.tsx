@@ -41,22 +41,25 @@ export const FeedbackSection = () => {
   return (
     <section className="py-16 bg-surface">
       <div className="section-container">
-        <motion.div
+
+        <div
           className="max-w-lg mx-auto"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
+          data-aos="fade-up"
         >
+
           <div className="text-center mb-8">
             <h2 className="font-display text-3xl font-bold mb-2">Share Your Feedback</h2>
+
             <p className="text-muted-foreground">Help us improve your experience</p>
           </div>
 
           <form onSubmit={handleSubmit} className="card-premium p-6 space-y-6">
+
             {/* Star rating */}
             <div className="text-center">
               <p className="text-sm text-muted-foreground mb-3">Rate your experience</p>
+
+
               <div className="flex justify-center gap-2">
                 {[1, 2, 3, 4, 5].map((star) => (
                   <button
@@ -99,8 +102,10 @@ export const FeedbackSection = () => {
               <Send className="w-5 h-5" />
               Submit Feedback
             </button>
+
           </form>
-        </motion.div>
+        </div>
+
       </div>
     </section>
   );
