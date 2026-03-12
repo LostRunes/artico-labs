@@ -1,0 +1,287 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Light mode */
+    --background: 0 0% 97%;
+    --foreground: 220 20% 10%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 220 20% 10%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 220 20% 10%;
+
+    --primary: 43 50% 59%;
+    --primary-foreground: 220 20% 10%;
+
+    --secondary: 210 20% 94%;
+    --secondary-foreground: 220 20% 20%;
+
+    --muted: 210 15% 90%;
+    --muted-foreground: 220 10% 45%;
+
+    --accent: 174 60% 55%;
+    --accent-foreground: 220 20% 10%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 220 15% 88%;
+    --input: 220 15% 88%;
+    --ring: 43 50% 59%;
+
+    --radius: 0.75rem;
+
+    /* ARTICO Custom Colors */
+    --gold: 43 50% 59%;
+    --gold-muted: 43 35% 45%;
+    --ice-blue: 174 60% 55%;
+    --ice-blue-glow: 174 80% 65%;
+    --charcoal: 220 15% 18%;
+    --surface: 0 0% 95%;
+    --surface-elevated: 0 0% 100%;
+
+    /* Gradients */
+    --gradient-gold: linear-gradient(135deg, hsl(43 50% 59%), hsl(35 55% 50%));
+    --gradient-ice: linear-gradient(135deg, hsl(174 60% 55%), hsl(190 70% 60%));
+    --gradient-dark: linear-gradient(180deg, hsl(220 20% 8%), hsl(220 15% 12%));
+    
+    /* Shadows */
+    --shadow-gold: 0 0 30px -5px hsl(43 50% 59% / 0.3);
+    --shadow-ice: 0 0 30px -5px hsl(174 60% 55% / 0.3);
+    --shadow-card: 0 4px 20px -4px hsl(220 20% 10% / 0.1);
+    --shadow-card-hover: 0 8px 30px -4px hsl(220 20% 10% / 0.15);
+
+    /* Glow effects */
+    --glow-gold: 0 0 40px hsl(43 50% 59% / 0.4);
+    --glow-ice: 0 0 40px hsl(174 60% 55% / 0.5);
+
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .dark {
+    --background: 220 20% 6%;
+    --foreground: 210 20% 95%;
+
+    --card: 220 18% 10%;
+    --card-foreground: 210 20% 95%;
+
+    --popover: 220 18% 10%;
+    --popover-foreground: 210 20% 95%;
+
+    --primary: 43 50% 59%;
+    --primary-foreground: 220 20% 6%;
+
+    --secondary: 220 15% 15%;
+    --secondary-foreground: 210 20% 90%;
+
+    --muted: 220 15% 18%;
+    --muted-foreground: 210 10% 55%;
+
+    --accent: 174 60% 55%;
+    --accent-foreground: 220 20% 6%;
+
+    --destructive: 0 62.8% 50%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 220 15% 18%;
+    --input: 220 15% 18%;
+    --ring: 43 50% 59%;
+
+    /* ARTICO Custom Colors - Dark */
+    --gold: 43 50% 59%;
+    --gold-muted: 43 40% 40%;
+    --ice-blue: 174 60% 55%;
+    --ice-blue-glow: 174 80% 70%;
+    --charcoal: 220 15% 12%;
+    --surface: 220 18% 10%;
+    --surface-elevated: 220 15% 14%;
+
+    /* Enhanced glows for dark mode */
+    --shadow-gold: 0 0 40px -5px hsl(43 50% 59% / 0.4);
+    --shadow-ice: 0 0 40px -5px hsl(174 60% 55% / 0.4);
+    --shadow-card: 0 4px 20px -4px hsl(0 0% 0% / 0.4);
+    --shadow-card-hover: 0 8px 40px -4px hsl(0 0% 0% / 0.5);
+    --glow-gold: 0 0 60px hsl(43 50% 59% / 0.5);
+    --glow-ice: 0 0 60px hsl(174 60% 55% / 0.6);
+
+    --sidebar-background: 220 18% 8%;
+    --sidebar-foreground: 210 20% 90%;
+    --sidebar-primary: 43 50% 59%;
+    --sidebar-primary-foreground: 220 20% 6%;
+    --sidebar-accent: 220 15% 15%;
+    --sidebar-accent-foreground: 210 20% 95%;
+    --sidebar-border: 220 15% 18%;
+    --sidebar-ring: 174 60% 55%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Space Grotesk', system-ui, sans-serif;
+  }
+}
+
+@layer components {
+  /* Premium card styling */
+  .card-premium {
+    @apply bg-card border border-border rounded-xl transition-all duration-300;
+    box-shadow: var(--shadow-card);
+  }
+
+  .card-premium:hover {
+    box-shadow: var(--shadow-card-hover);
+    box-shadow: 10px 5px 30px -15px rgb(255, 233, 233);
+    @apply border-primary/30;
+  }
+
+  /* Glow effects */
+  .glow-gold {
+    box-shadow: var(--glow-gold);
+  }
+
+  .glow-ice {
+    box-shadow: var(--glow-ice);
+  }
+
+  /* Text gradients */
+  .text-gradient-gold {
+    @apply bg-clip-text text-transparent;
+    background-image: var(--gradient-gold);
+  }
+
+  .text-gradient-ice {
+    @apply bg-clip-text text-transparent;
+    background-image: var(--gradient-ice);
+  }
+
+  /* Glass effect */
+  .glass {
+    @apply backdrop-blur-xl bg-background/80 border border-border/50;
+  }
+
+  /* Hero button variants */
+  .btn-hero-primary {
+    @apply px-8 py-4 rounded-xl font-semibold text-primary-foreground transition-all duration-300;
+    background: var(--gradient-gold);
+    box-shadow: var(--shadow-gold);
+  }
+
+  .btn-hero-primary:hover {
+    @apply scale-105;
+    box-shadow: var(--glow-gold);
+  }
+
+  .btn-hero-secondary {
+    @apply px-8 py-4 rounded-xl font-semibold border-2 border-accent text-accent transition-all duration-300;
+  }
+
+  .btn-hero-secondary:hover {
+    @apply bg-accent text-accent-foreground scale-105;
+    box-shadow: var(--glow-ice);
+  }
+
+  /* Animated underline */
+  .link-underline {
+    @apply relative;
+  }
+
+  .link-underline::after {
+    content: '';
+    @apply absolute bottom-0 left-0 w-full h-0.5 bg-primary scale-x-0 origin-right transition-transform duration-300;
+  }
+
+  .link-underline:hover::after {
+    @apply scale-x-100 origin-left;
+  }
+
+  /* Section styling */
+  .section-container {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  /* Product card hover slideshow */
+  .product-card-image {
+    @apply w-full h-full object-cover transition-opacity duration-500;
+  }
+}
+
+@layer utilities {
+  /* Pulse glow animation */
+  @keyframes pulse-glow {
+    0%, 100% {
+      opacity: 0.6;
+      filter: blur(20px);
+    }
+    50% {
+      opacity: 1;
+      filter: blur(25px);
+    }
+  }
+
+  .animate-pulse-glow {
+    animation: pulse-glow 3s ease-in-out infinite;
+  }
+
+  /* Fade in up animation */
+  @keyframes fade-in-up {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-fade-in-up {
+    animation: fade-in-up 0.8s ease-out forwards;
+  }
+
+  /* Subtle float animation */
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  /* Stagger delays */
+  .delay-100 { animation-delay: 100ms; }
+  .delay-200 { animation-delay: 200ms; }
+  .delay-300 { animation-delay: 300ms; }
+  .delay-400 { animation-delay: 400ms; }
+  .delay-500 { animation-delay: 500ms; }
+}
