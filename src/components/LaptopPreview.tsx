@@ -22,7 +22,7 @@ export const LaptopPreview = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   return (
-    <section id="try-on" className="py-20 bg-surface">
+    <section id="try-on" className="py-20 bg-surface" data-aos="fade-up">
       <div className="section-container">
         <motion.div
           className="text-center mb-12"
@@ -168,7 +168,7 @@ export const LaptopPreview = () => {
                     onClick={() => setSelectedSkin(skin)}
                     className={`relative p-4 rounded-xl border-2 transition-all duration-300 ${
                       selectedSkin.id === skin.id
-                        ? "border-primary"
+                        ? "border-transparent"
                         : "border-border hover:border-primary/50"
                     }`}
                     style={{ backgroundColor: skin.color }}

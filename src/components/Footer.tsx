@@ -21,21 +21,23 @@ export const Footer = () => {
               href="https://www.instagram.com/articopro/"
               target="_blank"
               rel="noopener noreferrer"
-              className="p-3 rounded-full bg-surface hover:bg-surface-elevated border border-border hover:border-primary/50 transition-all"
+              className="social-icon group"
             >
-              <Instagram className="w-5 h-5 text-muted-foreground hover:text-primary transition-colors" />
-            </a>
+              <Instagram className="icon w-5 h-5" />
+              </a>
+
             <a
               href="tel:+918455894907"
-              className="p-3 rounded-full bg-surface hover:bg-surface-elevated border border-border hover:border-primary/50 transition-all"
+              className="social-icon group"
             >
-              <Phone className="w-5 h-5 text-muted-foreground hover:text-primary transition-colors" />
+              <Phone className="icon w-5 h-5" />
             </a>
+
             <a
               href="mailto:articopro.team@gmail.com"
-              className="p-3 rounded-full bg-surface hover:bg-surface-elevated border border-border hover:border-primary/50 transition-all"
+              className="social-icon group"
             >
-              <Mail className="w-5 h-5 text-muted-foreground hover:text-primary transition-colors" />
+              <Mail className="icon w-5 h-5" />
             </a>
           </div>
 

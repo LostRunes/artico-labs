@@ -93,28 +93,69 @@ const Index = () => {
   const [activeTheme, setActiveTheme] = useState("All");
   const [activeSort, setActiveSort] = useState("popular");
 
-  // Filter products based on search and theme
+  // Original filtering logic (kept intact)
   const filterProducts = (products: typeof laptopSkins) => {
     return products.filter((product) => {
-      const matchesSearch = product.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      const matchesSearch =
+        product.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
         product.theme.toLowerCase().includes(searchQuery.toLowerCase());
-      const matchesTheme = activeTheme === "All" || product.theme === activeTheme;
+
+      const matchesTheme =
+        activeTheme === "All" || product.theme === activeTheme;
+
       return matchesSearch && matchesTheme;
     });
   };
 
-  const filteredLaptopSkins = useMemo(() => filterProducts(laptopSkins), [searchQuery, activeTheme]);
-  const filteredStickers = useMemo(() => filterProducts(stickers), [searchQuery, activeTheme]);
-  const filteredCoverTags = useMemo(() => filterProducts(coverTags), [searchQuery, activeTheme]);
-  const filteredTrackpadSkins = useMemo(() => filterProducts(trackpadSkins), [searchQuery, activeTheme]);
+  const processProducts = (products: typeof laptopSkins) => {
+    let result = filterProducts(products);
+
+    if (activeSort === "new") {
+      result = [...result].reverse();
+    }
+
+    if (activeSort === "theme") {
+      result = [...result].sort((a, b) =>
+        a.theme.localeCompare(b.theme)
+      );
+    }
+
+    if (activeSort === "popular") {
+      result = [...result].sort((a, b) =>
+        a.name.localeCompare(b.name)
+      );
+    }
+
+    return result;
+  };
+
+  const filteredLaptopSkins = useMemo(
+    () => processProducts(laptopSkins),
+    [searchQuery, activeTheme, activeSort]
+  );
+
+  const filteredStickers = useMemo(
+    () => processProducts(stickers),
+    [searchQuery, activeTheme, activeSort]
+  );
+
+  const filteredCoverTags = useMemo(
+    () => processProducts(coverTags),
+    [searchQuery, activeTheme, activeSort]
+  );
+
+  const filteredTrackpadSkins = useMemo(
+    () => processProducts(trackpadSkins),
+    [searchQuery, activeTheme, activeSort]
+  );
 
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
       <HeroSection />
-      
+
       <CategoryQuickNav />
-      
+
       {/* Products section */}
       <div id="products">
         <FilterBar

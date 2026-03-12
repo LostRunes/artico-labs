@@ -3,7 +3,7 @@ import { Palette, Upload, MessageCircle } from "lucide-react";
 
 export const CustomSection = () => {
   return (
-    <section id="custom" className="py-20">
+    <section id="custom" className="py-20" data-aos="fade-up">
       <div className="section-container">
         <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-charcoal to-background border border-border">
           {/* Background decoration */}
