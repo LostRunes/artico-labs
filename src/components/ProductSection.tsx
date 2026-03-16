@@ -7,6 +7,7 @@ interface Product {
   name: string;
   theme: string;
   images: string[];
+  price: number;
 }
 
 interface ProductSectionProps {

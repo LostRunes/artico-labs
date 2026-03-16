@@ -1,13 +1,38 @@
+import axiosInstance from "@/api/axios";
+import { Category } from "@/interfaces/category.interface";
 import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
 
-const categories = [
-  { label: "Laptop Skins", href: "#laptop-skins" },
-  { label: "Stickers", href: "#stickers" },
-  { label: "Cover Tags", href: "#cover-tags" },
-  { label: "Trackpads", href: "#trackpad-skins" },
-];
+// const categories = [
+//   { label: "Laptop Skins", href: "#laptop-skins" },
+//   { label: "Stickers", href: "#stickers" },
+//   { label: "Cover Tags", href: "#cover-tags" },
+//   { label: "Trackpads", href: "#trackpad-skins" },
+// ];
+
+export interface ExtendedCategory extends Category {
+  href: string;
+}
 
 export const CategoryQuickNav = () => {
+  const [categories, setCategories] = useState<ExtendedCategory[]>([]);
+
+  useEffect(() => {
+    getCategories();
+  }, [])
+
+  const getCategories = async (): Promise<void> => {
+    const response = await axiosInstance.get("/categories");
+    const data = await response.data.data;
+
+    const addedHrefs = data.map((data: ExtendedCategory) => {
+      data.href = "#" + data.name.toLowerCase().split(/ /g).join("-");
+      return data;
+    })
+    
+    setCategories(addedHrefs);
+  }
+
   return (
     <section className="relative z-10">
       <motion.div
@@ -24,7 +49,7 @@ export const CategoryQuickNav = () => {
 
           return (
             <a
-              key={cat.label}
+              key={cat.name}
               href={cat.href}
               className={`
                 px-6 py-3 rounded-full
@@ -37,7 +62,7 @@ export const CategoryQuickNav = () => {
                 ${hoverColor}
               `}
             >
-              {cat.label}
+              {cat.name}
             </a>
           );
         })}

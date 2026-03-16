@@ -1,23 +1,25 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Search, SlidersHorizontal, X } from "lucide-react";
+import { SubCategory } from "@/interfaces/sub-category.interface";
+import axiosInstance from "@/api/axios";
 
-const themes = [
-  "All",
-  "Anime",
-  "Marvel",
-  "Transfomer",
-  "Stranger Things",
-  "DC",
-  "Vibrant",
-  "Studio Ghibli",
-  "F1",
-  "Star Wars",
-  "Gaming",
-  "Carbon Fibre",
-  "Plain",
+// const themes = [
+//   "All",
+//   "Anime",
+//   "Marvel",
+//   "Transfomer",
+//   "Stranger Things",
+//   "DC",
+//   "Vibrant",
+//   "Studio Ghibli",
+//   "F1",
+//   "Star Wars",
+//   "Gaming",
+//   "Carbon Fibre",
+//   "Plain",
 
-];
+// ];
 
 const sortOptions = [
   { value: "popular", label: "Popular" },
@@ -40,15 +42,28 @@ export const FilterBar = ({
   activeTheme,
   activeSort,
 }: FilterBarProps) => {
+  const [themes, setThemes] = useState<SubCategory[]>([]);
 
   const [searchValue, setSearchValue] = useState("");
   const [showSort, setShowSort] = useState(false);
   const [showFilters, setShowFilters] = useState(false);
 
+
+  useEffect(() => {
+    getSubCategories();
+  }, [])
+
   const handleSearchChange = (value: string) => {
     setSearchValue(value);
     onSearchChange(value);
   };
+
+  const getSubCategories = async (): Promise<void> => {
+    const response = await axiosInstance.get("/sub-categories");
+
+    const data = await response.data.data;
+    setThemes(data);
+  }
 
   return (
     <div className="py-6 sticky top-20 z-40 glass">
@@ -129,17 +144,39 @@ export const FilterBar = ({
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
         >
-          {themes.map((theme) => (
-            <button
-              key={theme}
-              onClick={() => onThemeChange(theme)}
+          <button
+              onClick={() => onThemeChange("All")}
               className={`theme-border-anim px-4 py-[9px] flex items-center justify-center rounded-full text-sm font-medium whitespace-nowrap transition-all duration-300 bg-transparent relative overflow-hidden ${
-                activeTheme === theme
+                activeTheme === "All"
                   ? "active text-primary"
                   : "text-muted-foreground hover:text-primary"
               }`}
             >
-              {theme}
+              All
+
+              <svg viewBox="0 -3 103 40" preserveAspectRatio="none">
+                <rect
+                  x="1.8"
+                  y="2.5"
+                  width="99"
+                  height="28"
+                  rx="20"
+                  ry="20"
+                  pathLength="0.9"
+                />
+              </svg>
+            </button>
+          {themes.map((theme) => (
+            <button
+              key={theme._id}
+              onClick={() => onThemeChange(theme.name)}
+              className={`theme-border-anim px-4 py-[9px] flex items-center justify-center rounded-full text-sm font-medium whitespace-nowrap transition-all duration-300 bg-transparent relative overflow-hidden ${
+                activeTheme === theme.name
+                  ? "active text-primary"
+                  : "text-muted-foreground hover:text-primary"
+              }`}
+            >
+              {theme.name}
 
               <svg viewBox="0 -3 103 40" preserveAspectRatio="none">
                 <rect
