@@ -1,37 +1,24 @@
-import axiosInstance from "@/api/axios";
 import { Category } from "@/interfaces/category.interface";
 import { motion } from "framer-motion";
-import { useEffect, useState } from "react";
-
-// const categories = [
-//   { label: "Laptop Skins", href: "#laptop-skins" },
-//   { label: "Stickers", href: "#stickers" },
-//   { label: "Cover Tags", href: "#cover-tags" },
-//   { label: "Trackpads", href: "#trackpad-skins" },
-// ];
 
 export interface ExtendedCategory extends Category {
   href: string;
 }
 
-export const CategoryQuickNav = () => {
-  const [categories, setCategories] = useState<ExtendedCategory[]>([]);
+interface CategoryQuickNavProps {
+  categories: Category[];
+}
 
-  useEffect(() => {
-    getCategories();
-  }, [])
+export const CategoryQuickNav = ({ categories }: CategoryQuickNavProps) => {
+  const handleCategoryClick = (categoryId: string) => {
+    const el = document.getElementById(categoryId);
+    if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
 
-  const getCategories = async (): Promise<void> => {
-    const response = await axiosInstance.get("/categories");
-    const data = await response.data.data;
-
-    const addedHrefs = data.map((data: ExtendedCategory) => {
-      data.href = "#" + data.name.toLowerCase().split(/ /g).join("-");
-      return data;
-    })
-    
-    setCategories(addedHrefs);
-  }
+  const extendedCategories: ExtendedCategory[] = categories.map((cat) => ({
+    ...cat,
+    href: "#" + cat.name.toLowerCase().split(/\s+/g).join("-"),
+  }));
 
   return (
     <section className="relative z-10">
@@ -41,7 +28,7 @@ export const CategoryQuickNav = () => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, ease: "easeOut" }}
       >
-        {categories.map((cat, index) => {
+        {extendedCategories.map((cat, index) => {
           const hoverColor =
             index % 2 === 0
               ? "hover:text-primary hover:border-primary"
@@ -49,8 +36,12 @@ export const CategoryQuickNav = () => {
 
           return (
             <a
-              key={cat.name}
-              href={cat.href}
+              key={cat._id}
+              href={cat.href} 
+              onClick={(e) => {
+                e.preventDefault();
+                handleCategoryClick(cat.href.slice(1));
+              }}
               className={`
                 px-6 py-3 rounded-full
                 bg-surface-elevated

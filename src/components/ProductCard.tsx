@@ -1,17 +1,18 @@
 import { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
+import { Product } from "@/interfaces/product.interface";
 
 interface ProductCardProps {
-  id: string;
-  name: string;
-  theme: string;
-  images: string[];
-   price: number;
+  product: Product;
 }
 
-export const ProductCard = ({ id, name, theme, images, price }: ProductCardProps) => {
+export const ProductCard = ({ product }: ProductCardProps) => {
   const navigate = useNavigate();
+  const { name, images, price, slug, categories } = product;
+
+  const theme = categories?.map((cat) => cat.name).join(" • ") || "";
+
   const [isHovering, setIsHovering] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
@@ -39,7 +40,7 @@ export const ProductCard = ({ id, name, theme, images, price }: ProductCardProps
       className="card-premium group cursor-pointer overflow-hidden"
       onMouseEnter={() => setIsHovering(true)}
       onMouseLeave={() => setIsHovering(false)}
-      onClick={() => navigate(`/product/${id}`)}
+      onClick={() => navigate(`/product/${slug}`)}
       whileHover={{ y: -8 }}
       transition={{ duration: 0.3 }}
     >
@@ -75,20 +76,19 @@ export const ProductCard = ({ id, name, theme, images, price }: ProductCardProps
       </div>
 
       {/* Content */}
-     <div className="p-4">
-  <span className="text-xs font-medium text-ice uppercase tracking-wide">
-    {theme}
-  </span>
+      <div className="p-4">
+        <span className="text-xs font-medium text-ice uppercase tracking-wide">
+          {theme}
+        </span>
 
-  <h3 className="font-display text-lg font-semibold mt-1 group-hover:text-primary transition-colors">
-    {name}
-  </h3>
+        <h3 className="font-display text-lg font-semibold mt-1 group-hover:text-primary transition-colors">
+          {name}
+        </h3>
 
-  <div className="mt-2 text-sm font-semibold text-primary">
-    ₹{price}
-  </div>
-</div>
-
+        <div className="mt-2 text-sm font-semibold text-primary">
+          ₹{price}
+        </div>
+      </div>
     </motion.div>
   );
 };
