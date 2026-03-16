@@ -1,13 +1,7 @@
 import { useRef, useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { ProductCard } from "./ProductCard";
-
-interface Product {
-  id: string;
-  name: string;
-  theme: string;
-  images: string[];
-}
+import { Product } from "@/interfaces/product.interface";
 
 interface ProductSectionProps {
   id: string;
@@ -30,7 +24,7 @@ export const ProductSection = ({
   const [isHoveringRow2, setIsHoveringRow2] = useState(false);
 
   const speed = 1;
-  const enableScroll = products.length >1;
+  const enableScroll = products.length > 1;
 
   const displayProducts = enableScroll
     ? [...products, ...products, ...products]
@@ -86,66 +80,59 @@ export const ProductSection = ({
 
   return (
     <section id={id} className="py-20">
-
       <div className="section-container">
-
         <div className="text-center mb-12" data-aos="fade-up">
-  <h2 className="font-display text-4xl md:text-5xl font-bold mb-4">
-    {title}
-  </h2>
-
-  <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-    {description}
-  </p>
-</div>
+          <h2 className="font-display text-4xl md:text-5xl font-bold mb-4">{title}</h2>
+          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">{description}</p>
+        </div>
 
         <div data-aos="fade-up">
-
           <motion.div
             initial={{ opacity: 0, y: 60 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.7, ease: "easeOut" }}
           >
-
-            <div
-              ref={carouselRef}
-              className="flex gap-6 overflow-x-auto pb-4 no-scrollbar cursor-grab active:cursor-grabbing"
-              onMouseEnter={() => setIsHoveringRow1(true)}
-              onMouseLeave={() => setIsHoveringRow1(false)}
-            >
-              {displayProducts.map((product, index) => (
+            {displayProducts.length > 0 ? (
+              <>
                 <div
-                  key={`row1-${product.id}-${index}`}
-                  className="min-w-[280px] sm:min-w-[320px] lg:min-w-[350px] flex-shrink-0"
+                  ref={carouselRef}
+                  className="flex gap-6 overflow-x-auto pb-4 no-scrollbar cursor-grab active:cursor-grabbing"
+                  onMouseEnter={() => setIsHoveringRow1(true)}
+                  onMouseLeave={() => setIsHoveringRow1(false)}
                 >
-                  <ProductCard {...product} />
+                  {displayProducts.map((product, index) => (
+                    <div
+                      key={`row1-${product._id}-${index}`}
+                      className="min-w-[280px] sm:min-w-[320px] lg:min-w-[350px] flex-shrink-0"
+                    >
+                      <ProductCard product={product} />
+                    </div>
+                  ))}
                 </div>
-              ))}
-            </div>
 
-            <div
-              ref={carouselRef2}
-              className="flex gap-6 overflow-x-auto pb-4 mt-8 no-scrollbar cursor-grab active:cursor-grabbing"
-              onMouseEnter={() => setIsHoveringRow2(true)}
-              onMouseLeave={() => setIsHoveringRow2(false)}
-            >
-              {displayProducts.map((product, index) => (
                 <div
-                  key={`row2-${product.id}-${index}`}
-                  className="min-w-[280px] sm:min-w-[320px] lg:min-w-[350px] flex-shrink-0"
+                  ref={carouselRef2}
+                  className="flex gap-6 overflow-x-auto pb-4 mt-8 no-scrollbar cursor-grab active:cursor-grabbing"
+                  onMouseEnter={() => setIsHoveringRow2(true)}
+                  onMouseLeave={() => setIsHoveringRow2(false)}
                 >
-                  <ProductCard {...product} />
+                  {displayProducts.map((product, index) => (
+                    <div
+                      key={`row2-${product._id}-${index}`}
+                      className="min-w-[280px] sm:min-w-[320px] lg:min-w-[350px] flex-shrink-0"
+                    >
+                      <ProductCard product={product} />
+                    </div>
+                  ))}
                 </div>
-              ))}
-            </div>
-
+              </>
+            ) : (
+              <p className="text-center text-muted-foreground mt-8">No products available</p>
+            )}
           </motion.div>
-
         </div>
-
       </div>
-
     </section>
   );
 };
