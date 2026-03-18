@@ -15,12 +15,16 @@ const queryClient = new QueryClient();
 
 const App = () => {
 
-  useEffect(() => {
-    AOS.init({
-      duration: 800,
-      once: false
-    });
-  }, []);
+useEffect(() => {
+  AOS.init({
+    duration: 800,
+    once: false,
+    mirror: true, // 
+    easing: "ease-out-cubic",
+  });
+
+  AOS.refresh(); 
+}, []);
 
   return (
     <QueryClientProvider client={queryClient}>
