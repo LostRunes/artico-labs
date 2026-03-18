@@ -8,7 +8,6 @@ import { CustomSection } from "@/components/CustomSection";
 import { FeedbackSection } from "@/components/FeedbackSection";
 import { ContactSection } from "@/components/ContactSection";
 import { Footer } from "@/components/Footer";
-import { CategoryQuickNav } from "@/components/CategoryQuickNav";
 import axiosInstance from "@/api/axios";
 import { Product } from "@/interfaces/product.interface";
 import { Category } from "@/interfaces/category.interface";
@@ -28,7 +27,7 @@ const Index = () => {
   const fetchCategories = async () => {
     try {
       const res = await axiosInstance.get("/categories");
-      setCategories(res.data.data);
+      setCategories(res.data?.data || []);
     } catch (error) {
       console.error("Error fetching categories:", error);
     }
@@ -38,7 +37,7 @@ const Index = () => {
   const fetchSubCategories = async () => {
     try {
       const res = await axiosInstance.get("/sub-categories");
-      setSubCategories(res.data.data);
+      setSubCategories(res.data?.data || []);
     } catch (error) {
       console.error("Error fetching subcategories:", error);
     }
@@ -49,10 +48,15 @@ const Index = () => {
     try {
       setLoading(true);
       const params: Record<string, string> = {};
-      if (selectedCategories.length) params.categories = selectedCategories.join(",");
-      if (selectedSubCategories.length) params.sub_categories = selectedSubCategories.join(",");
+
+      if (selectedCategories.length)
+        params.categories = selectedCategories.join(",");
+
+      if (selectedSubCategories.length)
+        params.sub_categories = selectedSubCategories.join(",");
+
       const res = await axiosInstance.get("/stickers", { params });
-      setStickers(res.data.data);
+      setStickers(res.data?.data || []);
     } catch (error) {
       console.error("Error fetching stickers:", error);
     } finally {
@@ -79,34 +83,39 @@ const Index = () => {
 
   const filteredBySearch = (products: Product[]) => {
     if (!searchQuery) return products;
+
     return products.filter(
       (p) =>
-        p.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        p.categories.some((c) => c.name.toLowerCase().includes(searchQuery.toLowerCase())) ||
-        p.sub_categories.some((sc) => sc.name.toLowerCase().includes(searchQuery.toLowerCase()))
+        p.name?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        p.categories?.some((c) =>
+          c.name?.toLowerCase().includes(searchQuery.toLowerCase())
+        ) ||
+        p.sub_categories?.some((sc) =>
+          sc.name?.toLowerCase().includes(searchQuery.toLowerCase())
+        )
     );
   };
 
   const getProductsByCategory = (categoryName: string) =>
-    filteredBySearch(stickers).filter((p) => p.categories.some((c) => c.name === categoryName));
+    filteredBySearch(stickers || []).filter((p) =>
+      p.categories?.some((c) => c.name === categoryName)
+    );
 
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
       <HeroSection />
 
-      <CategoryQuickNav categories={categories} />
-
       <div id="products">
         <FilterBar
-          themes={subCategories}
+          themes={subCategories || []}
           onSearchChange={setSearchQuery}
           onThemeChange={handleSubCategoryFilter}
           onSortChange={setActiveSort}
           activeSort={activeSort}
         />
 
-        {categories.map((category) => {
+        {categories?.map((category) => {
           const categoryProducts = getProductsByCategory(category.name);
 
           return (
@@ -115,7 +124,7 @@ const Index = () => {
               id={category.name.toLowerCase().replace(/\s+/g, "-")}
               title={category.name}
               description={category.tagline}
-              products={categoryProducts}
+              products={categoryProducts || []}
             />
           );
         })}

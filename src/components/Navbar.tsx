@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Instagram, Phone, Mail } from "lucide-react";
 import { ArticoLogo } from "./ArticoLogo";
@@ -14,30 +14,44 @@ const navLinks = [
 
 export const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > window.innerHeight * 0.9);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
     <motion.nav
-      className="fixed top-0 left-0 right-0 z-50 glass"
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        isScrolled ? "glass" : "bg-transparent backdrop-blur-0"
+      }`}
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.6 }}
     >
       <div className="section-container">
         <div className="flex items-center justify-between h-20">
+
           {/* Logo */}
           <a href="/" className="flex items-center gap-3">
-  <img
-    src="/artico.png"
-    alt="Artico"
-    className="h-11 w-auto object-contain"
-  />
-
-  
-  <span className="font-display text-xl font-bold tracking-wide">
-    ARTICO
-  </span>
-</a>
-
+            <img
+              src="/artico.png"
+              alt="Artico"
+              className="h-11 w-auto object-contain"
+            />
+            <span
+              className={`font-display text-xl font-bold tracking-wide ${
+                isScrolled ? "" : "text-white"
+              }`}
+            >
+              ARTICO
+            </span>
+          </a>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-8">
@@ -45,7 +59,11 @@ export const Navbar = () => {
               <a
                 key={link.name}
                 href={link.href}
-                className="font-medium text-muted-foreground hover:text-foreground transition-colors link-underline"
+                className={`font-medium transition-colors link-underline ${
+                  isScrolled
+                    ? "text-muted-foreground hover:text-foreground"
+                    : "text-white hover:text-white/80"
+                }`}
               >
                 {link.name}
               </a>
@@ -60,7 +78,7 @@ export const Navbar = () => {
                 href="https://www.instagram.com/articopro/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="nav-social-icon w-11 h-11 rounded-full bg-surface-elevated ring-1 ring-border flex items-center justify-center relative overflow-hidden transition-all hover:-translate-y-[1px] hover:ring-1 hover:ring-ring hover:ring-offset-0"
+                className="nav-social-icon w-11 h-11 rounded-full bg-surface-elevated ring-1 ring-border flex items-center justify-center relative overflow-hidden transition-all hover:-translate-y-[1px]"
               >
                 <Instagram className="icon w-5 h-5" />
               </a>
@@ -71,7 +89,11 @@ export const Navbar = () => {
             {/* Mobile menu button */}
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="md:hidden p-2 rounded-lg hover:bg-surface-elevated transition-colors"
+              className={`md:hidden p-2 rounded-lg transition-colors ${
+                isScrolled
+                  ? "hover:bg-surface-elevated"
+                  : "hover:bg-white/10"
+              }`}
             >
               {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </button>
@@ -99,7 +121,7 @@ export const Navbar = () => {
                   {link.name}
                 </a>
               ))}
-              <div className="flex items-center gap-4 pt-4 border-t border-border">
+                           <div className="flex items-center gap-4 pt-4 border-t border-border">
                 <a
                   href="https://www.instagram.com/articopro/"
                   target="_blank"
