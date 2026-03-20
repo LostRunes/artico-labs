@@ -115,3 +115,4 @@ export const ArticoLogo = ({ className = "", size = "md", animated = true }: Art
     </motion.div>
   );
 };
+ 
