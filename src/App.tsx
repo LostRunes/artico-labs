@@ -10,6 +10,8 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import ProductDetail from "./pages/ProductDetail";
+import ProductsPage from "./pages/Products";
+import RootLayout from "./layouts/RootLayout";
 
 const queryClient = new QueryClient();
 
@@ -29,9 +31,12 @@ const App = () => {
         <Sonner />
         <BrowserRouter>
           <Routes>
-            <Route path="/" element={<Index />} />
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-            <Route path="/product/:slug" element={<ProductDetail />} />
+            <Route path="/" element={<RootLayout />}>
+              <Route index element={<Index />} />
+              {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+              <Route path="products/:categoryId" element={<ProductsPage />} />
+              <Route path="product/:slug" element={<ProductDetail />} />
+            </Route>
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>

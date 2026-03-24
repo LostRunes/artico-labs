@@ -1,15 +1,16 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, Instagram, Phone, Mail } from "lucide-react";
-import { ArticoLogo } from "./ArticoLogo";
+import { Menu, X, Instagram } from "lucide-react";
 import { ThemeToggle } from "./ThemeToggle";
+import CategoriesDropDown from "./CategoryDropDown";
 
 
 const navLinks = [
-  { name: "Products", href: "#products" },
-  { name: "Try On", href: "#try-on" },
-  { name: "Custom", href: "#custom" },
-  { name: "Contact", href: "#contact" },
+  { name: "Home", href: "/" },
+  { name: "Categories", type: "dropdown" },
+  { name: "Try On", href: "/#try-on" },
+  { name: "Custom", href: "/#custom" },
+  { name: "Contact", href: "/#contact" },
 ];
 
 export const Navbar = () => {
@@ -26,30 +27,31 @@ export const Navbar = () => {
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
           <a href="/" className="flex items-center gap-3">
-  <img
-    src="/artico.png"
-    alt="Artico"
-    className="h-11 w-auto object-contain"
-  />
+            <img
+              src="/artico.png"
+              alt="Artico"
+              className="h-11 w-auto object-contain"
+            />
 
-  
-  <span className="font-display text-xl font-bold tracking-wide">
-    ARTICO
-  </span>
-</a>
+
+            <span className="font-display text-xl font-bold tracking-wide">
+              ARTICO
+            </span>
+          </a>
 
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-8">
-            {navLinks.map((link) => (
-              <a
+            {navLinks.map((link) => {
+              if (link.type === "dropdown") return <CategoriesDropDown key="categories-dropdown" />
+              return <a
                 key={link.name}
                 href={link.href}
                 className="font-medium text-muted-foreground hover:text-foreground transition-colors link-underline"
               >
                 {link.name}
               </a>
-            ))}
+            })}
           </div>
 
           {/* Right side */}

@@ -4,8 +4,12 @@ import { ChevronDown } from "lucide-react";
 import { ArticoLogo } from "./ArticoLogo";
 import { ParallaxBackground } from "./ParallaxBackground";
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import { useCategories } from "@/hooks/useCategories";
 
 export const HeroSection = () => {
+  const { categories, loading } = useCategories();
+  const firstCategoryId = categories?.[0]?._id;
 
   const words = ["laptops.", "trackpads.", "& more."];
   const [index, setIndex] = useState(0);
@@ -21,8 +25,8 @@ export const HeroSection = () => {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       <ParallaxBackground />
-            
-            {/* Gradient overlay */}
+
+      {/* Gradient overlay */}
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-background pointer-events-none" />
 
       <div className="section-container relative z-10 text-center py-20">
@@ -49,8 +53,8 @@ export const HeroSection = () => {
             <img
               src="/artico.png"
               alt="Artico"
-              className="h-auto w-40 object-contain "/>
-              
+              className="h-auto w-40 object-contain " />
+
           </motion.div>
 
 
@@ -75,22 +79,22 @@ export const HeroSection = () => {
           transition={{ duration: 0.6, delay: 0.5 }}
         >
           Premium custom skins for{" "}
-          
-            <span className="inline-block relative h-[1.4em] min-w-[120px] overflow-hidden align-bottom text-ice font-semibold">            <AnimatePresence mode="wait">
-              <motion.span
-                key={words[index]}
-                initial={{ y: "100%", opacity: 0 }}
-                animate={{ y: "0%", opacity: 1 }}
-                exit={{ y: "-100%", opacity: 0 }}
-                transition={{ duration: 0.4 }}
-                className="absolute left-0"
-              >
-                {words[index]}
-              </motion.span>
-            </AnimatePresence>
+
+          <span className="inline-block relative h-[1.4em] min-w-[120px] overflow-hidden align-bottom text-ice font-semibold">            <AnimatePresence mode="wait">
+            <motion.span
+              key={words[index]}
+              initial={{ y: "100%", opacity: 0 }}
+              animate={{ y: "0%", opacity: 1 }}
+              exit={{ y: "-100%", opacity: 0 }}
+              transition={{ duration: 0.4 }}
+              className="absolute left-0"
+            >
+              {words[index]}
+            </motion.span>
+          </AnimatePresence>
           </span>
 
-          
+
           <br />
 
           <span className="text-ice">Your device. Reforged.</span>
@@ -103,9 +107,12 @@ export const HeroSection = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.7 }}
         >
-          <a href="#products" className="btn-hero-primary">
+          <Link
+            to={firstCategoryId ? `/products/${firstCategoryId}` : "#"}
+            className={`btn-hero-primary ${!firstCategoryId ? "pointer-events-none opacity-50" : ""}`}
+          >
             Explore Skins
-          </a>
+          </Link>
 
           <a href="#try-on" className="btn-hero-secondary">
             Try on Your Laptop
