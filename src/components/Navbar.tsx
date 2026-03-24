@@ -91,8 +91,9 @@ export const Navbar = () => {
             className="md:hidden glass border-t border-border"
           >
             <div className="section-container py-6 space-y-4">
-              {navLinks.map((link) => (
-                <a
+              {navLinks.map((link) => {
+                if (link.type === "dropdown") return <CategoriesDropDown key="categories-dropdown-mobile" />
+                return <a
                   key={link.name}
                   href={link.href}
                   onClick={() => setIsOpen(false)}
@@ -100,7 +101,7 @@ export const Navbar = () => {
                 >
                   {link.name}
                 </a>
-              ))}
+              })}
               <div className="flex items-center gap-4 pt-4 border-t border-border">
                 <a
                   href="https://www.instagram.com/articopro/"
